@@ -1,0 +1,45 @@
+<%-include('./partials/header'); -%>
+
+<main>
+    <div class="ui grid segment ">
+        <div class="segment eight wide column">
+            <h1>Welcome to your personalized page</h1>
+            <p>This is visual of templating through EJS</p>
+        </div>
+        <div class="segment eight wide column">
+            <h1> Create TODO List!</h1>
+            <form action ="/addtask" method="POST" class="ui segment">
+                <input type="text" name="newtask" placeholder="add new task">
+                <button> Add Task </button>
+            </form>
+        </div>
+    </div>
+    <div class="ui segment">
+        <center>
+            <h2> <%= user %>'s ToDo List </h2>
+        </center>       
+
+
+        <% if (tasks && tasks.length > 0) { %>
+        <ul>
+            <% tasks.forEach((task)=>{%>
+                <li class="ui segment">
+                    <h2><strong class="segment eight wide column" > <%= task.task %> </strong> </h2>
+                    <form action =<%=`/deletetask/${task.id}` %> method="POST" class="ui grid segment " >
+                        <input type="hidden" name="task" value="<%= task.task %>">
+                        <button class="segment eight wide column"> Delete Task </button>
+                    </form>
+                </li> 
+                <%}) %>
+        </ul>
+        <% } else { %>
+            <p>No tasks found.</p>
+          <% } %>
+    </div>
+</main>
+   
+   <footer >
+     <%-include('./partials/footer'); -%>
+   </footer>
+ </body>
+</html>

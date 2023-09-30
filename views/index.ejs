@@ -1,0 +1,58 @@
+<!-- importing a template from partials folder -->
+<%- include('./partials/header'); -%>
+
+<main>
+    <div class="ui segment">
+        <% if (!user){%>
+            <div class="ui grid segment ">
+                <div class="segment eight wide column">
+                    <h1> Welcome to the Harry Potter Fan Page</h1>
+                    <p> Please login to see the characters</p>
+                    <form action ="/login" method="POST" class="ui segment">
+                        <input type="text" name="user" placeholder="what's ur name">
+                        <button> Login </button>
+                    </form>
+                </div>
+                <div>
+                    <h1> Welcome to the Harry Potter Fan Page</h1>
+                    <p> Please Sign up  to see the characters</p>
+                    <form action ="/signup" method="POST" class="ui segment">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" placeholder="what's ur name">
+                        <br>
+                        <label for="password">Password</label>
+                        <input type="text" name="password" placeholder="what's ur password">
+                        <br>
+                        <center>
+                        <button> Sign up</button>
+                        </center>
+                    </form>
+                </div>
+            </div>
+            <%} else{%>
+                <h1> Welcome <%= user %> </h1>
+                <p> Here are the characters</p>
+                <form action ="/logout" method="POST" class="ui segment">
+                    <button> Logout </button>
+                </form>
+                <%} %>
+      <h1>At least we can see something now</h1>
+      <p>This is visual of templating through EJS</p>
+    </div>
+    <div class=" ui segment">
+        <!-- displaying a single variable passed from the route -->
+        <h2><%= subheading %> </h2>
+        <!-- loop through an array of objects and display the properties -->
+        <ul> <% characters.forEach((char)=>{%>
+            <li class="ui segment">
+                <strong> <%= char.name %> </strong> is a <%= char.designation %> at Hogwarts
+            </li> 
+            <%}) %> </ul>
+    </div>
+   </main>
+   
+   <footer>
+     <%-include('./partials/footer'); -%>
+   </footer>
+   </body>
+   </html>
